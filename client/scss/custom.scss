@@ -1,0 +1,144 @@
+.v-main {
+  .v-main__wrap {
+    .container {
+      .layout {
+        /*SWAP TABLE OF CONTENTS WITH CONTENT*/
+        flex-direction: row-reverse;
+
+        .page-col-content {
+          .contents {
+            /*MAKE CONTENT TO BE CENTER*/
+            max-width: 800px;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+
+    .row.no-gutters.align-content-center {
+      display: flex !important;
+      flex: 1 1 auto !important;
+      flex-wrap: nowrap !important;
+
+      .is-page-header {
+        flex-basis: 75% !important;
+        flex-grow: 0 !important;
+        max-width: 75% !important;
+        margin-left: 0 !important;
+        padding-left: 5px !important;
+
+        .headline, .caption {
+          max-width: 800px !important;
+          margin: 0 auto !important;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1904px) {
+  .v-main > .v-main__wrap .row.no-gutters.align-content-center > .is-page-header {
+    flex-basis: 83.3333333333% !important;
+    max-width: 83.3333333333% !important;
+  }
+}
+
+.v-application .primary {background-color: #33404d !important;border-color: #33404d !important;}
+
+.v-application .blue.darken-2 {background-color: #47596b !important;border-color: #47596b !important;}
+
+.v-application .blue.darken-3 {background-color: #29333d !important;border-color: #29333d !important;}
+
+.v-main .contents h1 {color: #29333d}
+
+.v-main .contents h1:after {height: 1px;background: #52667a;}
+
+.v-main .contents a {color: #2a353f;}
+
+.__bar-is-vertical {background: rgb(92, 115, 138) !important;}
+
+.nav-header.black {background: #1f262e !important; border-color: #1f262e !important;}
+
+.nav-header .nav-header-inner.black {background: #1f262e !important; border-color: #1f262e !important;}
+
+.theme--dark.v-text-field--solo>.v-input__control>.v-input__slot {background: #33404d;}
+
+kbd.pp {
+  background: #ececec;
+  padding: .05rem .4rem;
+  color: #1d1d1d;
+  border-radius: 0;
+}
+
+kbd.pp::after {
+  content: "]";
+  padding-left: 4px;
+}
+
+kbd.pp::before {
+  content: "\F022E [";
+  padding-right: 4px;
+  font: normal normal normal 24px/1 "Material Design Icons";
+  font-size: 16px;
+  position: relative;
+  top: 1px;
+}
+
+kbd.field {
+  background: #4c4c4c;
+}
+
+kbd.table {
+  background: #ffdbdb;
+  padding: .2rem .4rem;
+  color: #1d1d1d;
+  border-radius: 4px;
+}
+
+kbd.table::before {
+  content: "\F04EB";
+  padding-right: 4px;
+  font: normal normal normal 24px/1 "Material Design Icons";
+  font-size: 16px;
+  position: relative;
+  top: 1px;
+}
+
+kbd.scheme {
+  background: #dbe4ff;
+  padding: .2rem .4rem;
+  color: #1d1d1d;
+  border-radius: 4px;
+}
+
+kbd.scheme::before {
+  content: "\F01BC";
+  padding-right: 4px;
+  font: normal normal normal 24px/1 "Material Design Icons";
+  font-size: 16px;
+  position: relative;
+  top: 1px;
+}
+
+.v-main .contents code {
+  padding: 0px 6px !important;
+  margin: 0 3px !important;
+  color: #3564ce !important;
+  border: 1px solid #bfbfbf !important;
+  font-family: Roboto Mono,monospace !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.v-main .contents .prismjs>code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  display: block !important;
+  font-size: .85rem !important;
+  font-family: Roboto Mono,monospace !important;
+  border: 0 !important;
+}
