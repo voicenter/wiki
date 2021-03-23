@@ -484,7 +484,7 @@ router.get('/*', async (req, res, next) => {
             l: item.label,
             c: item.icon,
             y: item.targetType,
-            t: item.targetб,
+            t: item.target,
             n: item.items && item.items.length ? item.items.map(mapItem) : []
           }
         }
