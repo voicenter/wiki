@@ -43,6 +43,13 @@
                       span(:key='folder.id') {{folder.name}}
                       span.mx-1 /
                 .body-2(v-else) / #[em root]
+                v-text-field.mt-3(
+                  v-model='assetSearch'
+                  outlined
+                  color='teal'
+                  single-line
+                  placeholder='Asset name'
+                )
               template(v-if='folders.length > 0 || currentFolderId > 0')
                 v-btn.is-icon.mx-1(:color='$vuetify.theme.dark ? `grey lighten-1` : `grey darken-2`', outlined, :dark='currentFolderId > 0', @click='upFolder()', :disabled='currentFolderId === 0')
                   v-icon mdi-folder-upload
@@ -51,7 +58,7 @@
                   span.caption(style='text-transform: none;') {{ folder.name }}
                 v-divider.mt-2
               v-data-table(
-                :items='assets'
+                :items='assetsFiltered'
                 :headers='headers'
                 :page.sync='pagination'
                 :items-per-page='15'
@@ -118,7 +125,7 @@
                 v-pagination(v-model='pagination', :length='pageTotal', color='teal')
               .d-flex.mt-3
                 v-toolbar.radius-7(flat, :color='$vuetify.theme.dark ? `grey darken-2` : `grey lighten-4`', dense, height='44')
-                  .body-2(:class='$vuetify.theme.dark ? `grey--text text--lighten-1` : `grey--text text--darken-1`') {{$t('editor:assets.fileCount', { count: assets.length })}}
+                  .body-2(:class='$vuetify.theme.dark ? `grey--text text--lighten-1` : `grey--text text--darken-1`') {{$t('editor:assets.fileCount', { count: assetsFiltered.length })}}
                 v-btn.ml-3.mr-0.my-0.radius-7(color='red darken-2', large, @click='cancel', dark)
                   v-icon(left) mdi-close
                   span {{$t('common:actions.cancel')}}
@@ -260,6 +267,7 @@ export default {
       assets: [],
       pagination: 1,
       remoteImageUrl: '',
+      assetSearch: '',
       imageAlignments: [
         { text: 'None', value: '' },
         { text: 'Left', value: 'left' },
@@ -290,12 +298,15 @@ export default {
     folderTree: get('editor/media@folderTree'),
     currentFolderId: sync('editor/media@currentFolderId'),
     currentFileId: sync('editor/media@currentFileId'),
+    assetsFiltered() {
+      return this.assets.filter(asset => asset.filename.includes(this.assetSearch))
+    },
     pageTotal () {
-      if (!this.assets) {
+      if (!this.assetsFiltered) {
         return 0
       }
 
-      return Math.ceil(this.assets.length / 15)
+      return Math.ceil(this.assetsFiltered.length / 15)
     },
     headers() {
       return _.compact([
@@ -311,7 +322,7 @@ export default {
       return this.newFolderName.length > 1 && !localeSegmentRegex.test(this.newFolderName) && !disallowedFolderChars.test(this.newFolderName)
     },
     currentAsset () {
-      return _.find(this.assets, ['id', this.currentFileId]) || {}
+      return _.find(this.assetsFiltered, ['id', this.currentFileId]) || {}
     }
   },
   watch: {
@@ -357,7 +368,7 @@ export default {
       })
     },
     insert () {
-      const asset = _.find(this.assets, ['id', this.currentFileId])
+      const asset = _.find(this.assetsFiltered, ['id', this.currentFileId])
       const assetPath = this.folderTree.map(f => f.slug).join('/')
       this.$root.$emit('editorInsert', {
         kind: asset.kind,
