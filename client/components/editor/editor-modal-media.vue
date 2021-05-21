@@ -35,6 +35,13 @@
                       v-spacer
                       v-btn(text, @click='newFolderDialog = false') {{$t('common:actions.cancel')}}
                       v-btn.px-3(color='primary', @click='createFolder', :disabled='!isFolderNameValid', :loading='newFolderLoading') {{$t('common:actions.create')}}
+              v-text-field.mt-3(
+                v-model='assetSearch'
+                outlined
+                color='teal'
+                single-line
+                placeholder='Asset name'
+              )
               v-toolbar(flat, dense, :color='$vuetify.theme.dark ? `grey darken-3` : `white`')
                 template(v-if='folderTree.length > 0')
                   .body-2
@@ -43,13 +50,6 @@
                       span(:key='folder.id') {{folder.name}}
                       span.mx-1 /
                 .body-2(v-else) / #[em root]
-                v-text-field.mt-3(
-                  v-model='assetSearch'
-                  outlined
-                  color='teal'
-                  single-line
-                  placeholder='Asset name'
-                )
               template(v-if='folders.length > 0 || currentFolderId > 0')
                 v-btn.is-icon.mx-1(:color='$vuetify.theme.dark ? `grey lighten-1` : `grey darken-2`', outlined, :dark='currentFolderId > 0', @click='upFolder()', :disabled='currentFolderId === 0')
                   v-icon mdi-folder-upload
