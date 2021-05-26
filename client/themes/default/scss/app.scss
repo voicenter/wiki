@@ -549,8 +549,8 @@
 
     @at-root .theme--dark & {
       background-color: darken(mc('grey', '900'), 5%);
-      color: #c2f1ff;
-      border-color: #3564ce;
+      color: #c2f1ff !important;
+      border-color: #3564ce !important;
     }
   }
 
@@ -588,8 +588,8 @@
       direction: ltr;
     }
 
-    &.theme--dark path {
-        stroke: #fff;
+    @at-root .theme--dark & path {
+      stroke: #fff;
     }
   }
 
