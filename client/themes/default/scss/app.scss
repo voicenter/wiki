@@ -549,7 +549,8 @@
 
     @at-root .theme--dark & {
       background-color: darken(mc('grey', '900'), 5%);
-      color: mc('indigo', '100');
+      color: #c2f1ff;
+      border-color: #3564ce;
     }
   }
 
@@ -585,6 +586,10 @@
     margin-top: 1rem;
     svg:first-child {
       direction: ltr;
+    }
+
+    &.theme--dark path {
+        stroke: #fff;
     }
   }
 
